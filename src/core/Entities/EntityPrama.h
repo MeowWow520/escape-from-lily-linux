@@ -1,4 +1,4 @@
-// Created By MeowWow520 in 202611252326
+// Created by meowwow520 on 2026-11-25       
 #pragma once
 #ifndef ENTITYPRAMA_H
 #define ENTITYPRAMA_H
@@ -17,8 +17,9 @@
 
 
 struct RenderPrama {
-    bool TextureDirty{false};
-    bool Visible{false};
+    bool IsTextureDirty{false};
+    bool IsVisible{false};
+    bool IsMirror{false};
     float Rotation{0.0f}; // Define in 360
     // Hitbox .xy = box center, .wh = box wigth and height
     SDL_FRect Hitbox{0.0f,0.0f,0.0f,0.0f};
@@ -33,9 +34,15 @@ struct RenderPrama {
 
 struct EntityGame {
     float Health{0.0f};
+    float CurrentSpeed{0.0f};
+    glm::vec2 Direction{0.0f,0.0f};
+    glm::vec4 Position{0.0f,0.0f,0.0f,0.0f};
     std::string Name{"thereisnoname"};
 };
+
 struct EntityPrama {
     RenderPrama Renders{};
+    EntityGame Games{};
 };
+
 #endif // ENTITYPRAMA_H
