@@ -2,7 +2,12 @@
 
 
 
+#include "core/GameManager.h"
 
 int main() {
-    
+    GameManager gameManager;
+    if (gameManager.Initialize() != 0) {
+        return -1;
+    }
+    return gameManager.Running();
 }

@@ -4,29 +4,27 @@
 #ifndef GAMEMANAGER_H
 #define GAMEMANAGER_H
 
-#include <SDL3/SDL.h>
+#include "Object.h"
 
 
 
-class GameManager {
+class GameManager : public Object {
 public:
-    static GameManager& GetInstance() {
-        static GameManager instance;
-        return instance;
-    }
+    GameManager() = default;
     ~GameManager() = default;
+    
+    int Running();
+
+    int Initialize() override;
+    int HandleEvents(SDL_Event& event) override;
+    int Update() override;
+    int Render() override;
+    int Destroy() override;
 
 protected:
-    int Initialize();
-    int Update();
-    int HandleEvents(SDL_Event& event);
-    int Render();
-    int Destroy();
 
 private:
-    GameManager() = default;
-    GameManager(const GameManager&) = delete;
-    GameManager& operator=(const GameManager&) = delete;
+    GameCtx m_GameCtx;
 };
 
 #endif // GAMEMANAGER_H
