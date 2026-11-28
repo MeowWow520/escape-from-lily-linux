@@ -1,23 +1,24 @@
-// Created by meowwow520 on 2026-11-26       
-
-
+// Created by meowwow520 on 2026-11-26
 
 #include "GameManager.h"
+#include "Logger.h"
+#include <spdlog/spdlog.h>
+
+
 
 int GameManager::Initialize() {
-    if (!SDL_Init(SDL_INIT_VIDEO)) {
-        return -1;
-    }
-    if (m_GameCtx.Initialize() != 0) {
-        SDL_Quit();
-        return -1;
-    }
+    Logger(spdlog::level::info, !SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO), "SDL_Init");
+
+    Logger(spdlog::level::info, (m_GameCtx.Initialize() != 0), "SDL_Init");
+
     AttachGameContext(m_GameCtx.GetGameContext());
     return 0;
 }
 
 int GameManager::Running() {
     SDL_Event event;
+    Logger(spdlog::level::info, 0, "Entering main loop ...");
+
     while (Context().windowCtx.isRunning) {
         auto &ctx = Context().windowCtx;
         Uint64 currentFrameTime = SDL_GetPerformanceCounter();
